@@ -1,5 +1,5 @@
 "use client";
-import { IProducts } from "@/types/interfaces";
+import { ICategory, IProducts } from "@/types/interfaces";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const shopApi = createApi({
@@ -11,7 +11,12 @@ export const shopApi = createApi({
         url: "/products",
       }),
     }),
+    getCategories: builder.query<ICategory[], null>({
+      query: () => ({
+        url: "/categories",
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = shopApi;
+export const { useGetProductsQuery, useGetCategoriesQuery } = shopApi;
