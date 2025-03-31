@@ -1,0 +1,10 @@
+.categories {
+  height: 423px;
+  margin-bottom: 20px;
+}
+.row {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}

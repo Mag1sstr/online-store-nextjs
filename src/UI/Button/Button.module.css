@@ -6,4 +6,8 @@
   background: var(--btn-color);
   border: none;
   border-radius: 6px;
+  cursor: pointer;
+}
+.btn:hover {
+  filter: brightness(90%);
 }

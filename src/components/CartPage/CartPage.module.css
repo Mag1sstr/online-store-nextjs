@@ -1,0 +1,33 @@
+.inner {
+  padding: 25px 32px;
+  width: 100%;
+  height: 423px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--dark-gray-color);
+  border-radius: 6px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.total {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-gray);
+  & > span {
+    color: #fff;
+  }
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

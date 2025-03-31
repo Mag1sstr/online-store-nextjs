@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  column-gap: 10px;
+}
+.page {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #212123;
+  color: #576067;
+}
+.active {
+  background: var(--btn-color);
+  color: #fff;
+}
+.page:hover {
+  filter: brightness(130%);
+}
