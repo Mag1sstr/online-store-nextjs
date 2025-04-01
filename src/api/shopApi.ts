@@ -16,7 +16,16 @@ export const shopApi = createApi({
         url: "/categories",
       }),
     }),
+    getSingleCategoryProducts: builder.query<IProducts[], string>({
+      query: (slug) => ({
+        url: `https://api.escuelajs.co/api/v1/products/?categorySlug=${slug}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetCategoriesQuery } = shopApi;
+export const {
+  useGetProductsQuery,
+  useGetCategoriesQuery,
+  useGetSingleCategoryProductsQuery,
+} = shopApi;

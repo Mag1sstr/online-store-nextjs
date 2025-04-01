@@ -1,0 +1,21 @@
+.inner {
+  width: 100%;
+  background: var(--dark-gray-color);
+  border-radius: 6px;
+  padding: 24px 22px;
+}
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 32px;
+}
+.title::first-letter {
+  color: var(--purple-color);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 20px;
+}

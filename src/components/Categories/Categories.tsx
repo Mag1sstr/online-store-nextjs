@@ -1,6 +1,7 @@
 "use client";
 import { useGetCategoriesQuery } from "@/api/shopApi";
 import styles from "./Categories.module.css";
+import { redirect } from "next/navigation";
 
 export default function Categories() {
   const { data: categories } = useGetCategoriesQuery(null);
@@ -13,7 +14,11 @@ export default function Categories() {
         <ul className={styles.col}>
           {categories &&
             categories.map((item) => (
-              <li key={item.id} className={styles.item}>
+              <li
+                onClick={() => redirect(`/category/${item.slug}`)}
+                key={item.id}
+                className={styles.item}
+              >
                 {item.name}
               </li>
             ))}

@@ -19,8 +19,11 @@
 .user__img {
   width: 36px;
   height: 36px;
-  background: #000;
+  background: #191919;
   border-radius: 50%;
+  background-image: url(../../images/user-avatar.png);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* search */
