@@ -4,12 +4,19 @@ import styles from "./ProductPage.module.css";
 import { useGetSingleProductQuery } from "@/api/shopApi";
 import { useState } from "react";
 import Button from "@/UI/Button/Button";
+import Spinner from "../Spinner/Spinner";
+import { useAppDispatch } from "@/store/store";
+import { addCart } from "@/store/cartSlice";
 
 export default function ProductPage() {
   const { id } = useParams();
-  const { data } = useGetSingleProductQuery(Number(id));
+  const { data, isLoading } = useGetSingleProductQuery(Number(id));
   const [currImage, setCurrImage] = useState(0);
-  console.log(data);
+  const dispatch = useAppDispatch();
+  //   console.log(data);
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <section className={styles.product}>
@@ -42,7 +49,9 @@ export default function ProductPage() {
               </p>
               <p className={styles.text}>{data?.description}</p>
               <div className={styles.buttons}>
-                <Button>Add to cart</Button>
+                <Button onClick={() => dispatch(addCart({ ...data }))}>
+                  Add to cart
+                </Button>
                 <Button>Add to favorites</Button>
               </div>
             </div>

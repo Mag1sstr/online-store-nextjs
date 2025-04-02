@@ -7,8 +7,10 @@ import searchImg from "../../images/header/search.svg";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useAppSelector } from "@/store/store";
 
 export default function Header() {
+  const { cart } = useAppSelector((state) => state.cart);
   return (
     <header className={styles.header}>
       <div className="conteiner">
@@ -35,7 +37,7 @@ export default function Header() {
               <Link href="/cart">
                 <Image src={cartImg} alt="cart" />
               </Link>
-              <div className={styles.amount}>0</div>
+              <div className={styles.amount}>{cart.length}</div>
             </div>
           </div>
         </div>

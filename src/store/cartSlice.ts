@@ -14,6 +14,11 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addCart(state, action) {
+      for (const el of state.cart) {
+        if (el.id === action.payload.id) {
+          return;
+        }
+      }
       state.cart.push(action.payload);
     },
   },
