@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/router";
 import styles from "./CategoryPage.module.css";
 import { useParams } from "next/navigation";
 import { useGetSingleCategoryProductsQuery } from "@/api/shopApi";
@@ -9,7 +8,7 @@ import Spinner from "../Spinner/Spinner";
 export default function CategoryPage() {
   const { slug } = useParams();
   const { data, isLoading } = useGetSingleCategoryProductsQuery(String(slug));
-  console.log(data);
+
   if (isLoading) {
     return <Spinner />;
   }

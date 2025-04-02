@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 
 export default function Categories() {
   const { data: categories } = useGetCategoriesQuery(null);
-  //   console.log(data);
 
   return (
     <div className={styles.left}>
