@@ -1,4 +1,4 @@
-import { IProducts } from "@/types/interfaces";
+import { ICart } from "@/types/interfaces";
 import styles from "./CartItem.module.css";
 import Image from "next/image";
 import delImage from "../../images/del.svg";
@@ -8,7 +8,8 @@ export default function CartItem({
   title,
   category,
   price,
-}: IProducts) {
+  count,
+}: ICart) {
   return (
     <div className={styles.item}>
       <div className={styles.row}>
@@ -21,7 +22,7 @@ export default function CartItem({
       <div className={styles.price}>{price}$</div>
       <div className={styles.counter}>
         <button>-</button>
-        <div className={styles.amount}>1</div>
+        <div className={styles.amount}>{count}</div>
         <button>+</button>
       </div>
       <div>

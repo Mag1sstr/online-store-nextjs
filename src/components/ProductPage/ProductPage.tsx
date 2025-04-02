@@ -49,7 +49,9 @@ export default function ProductPage() {
               </p>
               <p className={styles.text}>{data?.description}</p>
               <div className={styles.buttons}>
-                <Button onClick={() => dispatch(addCart({ ...data }))}>
+                <Button
+                  onClick={() => dispatch(addCart({ ...data, count: 1 }))}
+                >
                   Add to cart
                 </Button>
                 <Button>Add to favorites</Button>

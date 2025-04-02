@@ -1,8 +1,8 @@
-import { IProducts } from "@/types/interfaces";
+import { ICart } from "@/types/interfaces";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ICartSlice {
-  cart: IProducts[];
+  cart: ICart[];
 }
 
 const initialState: ICartSlice = {

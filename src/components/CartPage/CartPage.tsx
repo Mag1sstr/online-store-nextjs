@@ -6,6 +6,7 @@ import { useAppSelector } from "@/store/store";
 
 export default function CartPage() {
   const { cart } = useAppSelector((state) => state.cart);
+  const totalPrice = cart.reduce((acc, v) => acc + v.price * v.count, 0);
   return (
     <section className={styles.cart}>
       <div className="conteiner">
@@ -18,7 +19,7 @@ export default function CartPage() {
           </div>
           <div className={styles.row}>
             <div className={styles.total}>
-              TOTAL PRICE: <span>198$</span>
+              TOTAL PRICE: <span>{totalPrice}$</span>
             </div>
             <Button>Proceed to checkout</Button>
           </div>

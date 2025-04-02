@@ -19,3 +19,7 @@ export interface ICategory {
   slug: string;
   image: string;
 }
+
+export interface ICart extends IProducts {
+  count: number;
+}
