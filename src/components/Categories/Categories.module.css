@@ -21,12 +21,22 @@
   color: var(--light-gray);
 }
 .col {
+  height: 270px;
+  overflow: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
   font-size: 14px;
   font-weight: 500;
   color: var(--light-gray);
+}
+.col::-webkit-scrollbar {
+  width: 5px;
+}
+.col::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--purple-color);
 }
 .item {
   cursor: pointer;

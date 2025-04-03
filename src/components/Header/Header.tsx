@@ -8,8 +8,15 @@ import searchImg from "../../images/header/search.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppSelector } from "@/store/store";
+import { useState } from "react";
+import { useDebounce } from "@/hooks/useDebouce";
+import { useGetProductsByTitleQuery } from "@/api/shopApi";
+import { redirect } from "next/navigation";
 
 export default function Header() {
+  const [searchValue, setSearchValue] = useState("");
+  const debounceValue = useDebounce(searchValue);
+  const { data } = useGetProductsByTitleQuery(debounceValue);
   const { cart } = useAppSelector((state) => state.cart);
   return (
     <header className={styles.header}>
@@ -26,10 +33,41 @@ export default function Header() {
           <div className={styles.search}>
             <Image src={searchImg} alt="search" />
             <input
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
               className={styles.input}
               type="text"
               placeholder="Search for anything..."
             />
+            <div
+              className={`${styles.search__drop} ${
+                searchValue.trim() && styles.drop
+              }`}
+            >
+              <div className={styles.drop__col}>
+                {data ? (
+                  data.map((item) => (
+                    <div
+                      key={item.id}
+                      onClick={() => {
+                        setSearchValue("");
+                        redirect(`/product/${item.id}`);
+                      }}
+                      className={styles.drop__item}
+                    >
+                      <img
+                        className={styles.drop__img}
+                        src={item.images[0]}
+                        alt={item.title}
+                      />{" "}
+                      {item.title}
+                    </div>
+                  ))
+                ) : (
+                  <div>Not found</div>
+                )}
+              </div>
+            </div>
           </div>
           <div className={styles.shop}>
             <Image src={likeImg} alt="like" />
