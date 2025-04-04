@@ -14,7 +14,7 @@ export default function CartPage() {
           <h3 className={styles.title}>Your cart</h3>
           <div className={styles.col}>
             {cart.map((item) => (
-              <CartItem key={item.id} {...item} />
+              <CartItem key={item.id} {...item} cart={cart} />
             ))}
           </div>
           <div className={styles.row}>

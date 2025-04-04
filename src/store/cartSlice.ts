@@ -21,9 +21,12 @@ export const cartSlice = createSlice({
       }
       state.cart.push(action.payload);
     },
+    setCart(state, action) {
+      state.cart = action.payload;
+    },
   },
 });
 
-export const { addCart } = cartSlice.actions;
+export const { addCart, setCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

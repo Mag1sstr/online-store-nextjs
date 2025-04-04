@@ -2,6 +2,13 @@ import { ICart } from "@/types/interfaces";
 import styles from "./CartItem.module.css";
 import Image from "next/image";
 import delImage from "../../images/del.svg";
+import { MouseEvent } from "react";
+import { useAppDispatch } from "@/store/store";
+import { setCart } from "@/store/cartSlice";
+
+interface IProps {
+  cart: ICart[];
+}
 
 export default function CartItem({
   images,
@@ -9,7 +16,40 @@ export default function CartItem({
   category,
   price,
   count,
-}: ICart) {
+  id,
+  cart,
+}: ICart & IProps) {
+  const dispatch = useAppDispatch();
+  function increase(id: number) {
+    dispatch(
+      setCart(
+        cart.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              count: item.count + 1,
+            };
+          }
+          return item;
+        })
+      )
+    );
+  }
+  function decrease(id: number) {
+    dispatch(
+      setCart(
+        cart.map((item) => {
+          if (item.id === id && item.count > 1) {
+            return {
+              ...item,
+              count: item.count - 1,
+            };
+          }
+          return item;
+        })
+      )
+    );
+  }
   return (
     <div className={styles.item}>
       <div className={styles.row}>
@@ -21,12 +61,12 @@ export default function CartItem({
       </div>
       <div className={styles.price}>{price}$</div>
       <div className={styles.counter}>
-        <button>-</button>
+        <button onClick={() => decrease(id)}>-</button>
         <div className={styles.amount}>{count}</div>
-        <button>+</button>
+        <button onClick={() => increase(id)}>+</button>
       </div>
       <div>
-        <div className={styles.totalPrice}>{price}$</div>
+        <div className={styles.totalPrice}>{price * count}$</div>
         <Image src={delImage} alt="del" />
       </div>
     </div>
