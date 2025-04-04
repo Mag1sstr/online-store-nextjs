@@ -3,7 +3,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  background: var(--btn-color);
+  /* background: var(--btn-color); */
   border: none;
   border-radius: 6px;
   cursor: pointer;

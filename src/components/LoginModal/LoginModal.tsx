@@ -2,6 +2,7 @@
 import Image from "next/image";
 import styles from "./LoginModal.module.css";
 import closeImg from "../../images/close.svg";
+import Button from "@/UI/Button/Button";
 
 interface IProps {
   open: boolean;
@@ -23,6 +24,16 @@ export default function LoginModal({ open, setOpen }: IProps) {
             alt=""
           />
           <h3 className={styles.title}>Register</h3>
+          <div className={styles.col}>
+            <input className={styles.input} type="text" placeholder="Name" />
+            <input className={styles.input} type="text" placeholder="Email" />
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Password"
+            />
+          </div>
+          <Button width="100%">Create an account</Button>
         </div>
       </div>
     </div>

@@ -54,7 +54,9 @@ export default function ProductPage() {
                 >
                   Add to cart
                 </Button>
-                <Button>Add to favorites</Button>
+                <Button background="#576067" color="#B8B8B8">
+                  Add to favorites
+                </Button>
               </div>
             </div>
           </div>
