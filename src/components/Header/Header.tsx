@@ -12,21 +12,24 @@ import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebouce";
 import { useGetProductsByTitleQuery } from "@/api/shopApi";
 import { redirect } from "next/navigation";
+import LoginModal from "../LoginModal/LoginModal";
 
 export default function Header() {
+  const [openModal, setOpenModal] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const debounceValue = useDebounce(searchValue);
   const { data } = useGetProductsByTitleQuery(debounceValue);
   const { cart } = useAppSelector((state) => state.cart);
   return (
     <header className={styles.header}>
+      <LoginModal open={openModal} setOpen={setOpenModal} />
       <div className="conteiner">
         <div className={styles.row}>
           <Link href="/">
             <Image priority={true} src={logoImg} alt="logo" />
           </Link>
 
-          <div className={styles.user}>
+          <div onClick={() => setOpenModal(true)} className={styles.user}>
             <div className={styles.user__img}></div>
             Danil karachev
           </div>

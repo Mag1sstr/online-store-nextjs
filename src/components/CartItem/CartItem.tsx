@@ -35,6 +35,7 @@ export default function CartItem({
       )
     );
   }
+
   function decrease(id: number) {
     dispatch(
       setCart(
@@ -50,6 +51,11 @@ export default function CartItem({
       )
     );
   }
+
+  function deleteCartItem(id: number) {
+    dispatch(setCart(cart.filter((item) => item.id !== id)));
+  }
+
   return (
     <div className={styles.item}>
       <div className={styles.row}>
@@ -67,7 +73,7 @@ export default function CartItem({
       </div>
       <div>
         <div className={styles.totalPrice}>{price * count}$</div>
-        <Image src={delImage} alt="del" />
+        <Image onClick={() => deleteCartItem(id)} src={delImage} alt="del" />
       </div>
     </div>
   );

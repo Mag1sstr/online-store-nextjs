@@ -34,3 +34,6 @@ ul {
   flex-direction: column;
   justify-content: space-between;
 }
+::-webkit-scrollbar {
+  display: none;
+}
