@@ -22,9 +22,9 @@ export const userSlice = createSlice({
   },
 });
 
-export function getUser() {
+export function getUser(token: string) {
   return function (dispatch: AppDispatch) {
-    const { token } = useAppSelector((state) => state.user);
+    // const { token } = useAppSelector((state) => state.user);
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       axios.get("https://api.escuelajs.co/api/v1/auth/profile").then((resp) => {
