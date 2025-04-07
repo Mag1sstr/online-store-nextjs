@@ -22,7 +22,7 @@ export default function LoginModal({ open, setOpen }: IProps) {
   if (isSuccess) {
     localStorage.setItem("token", data.access_token);
     setOpen(false);
-    location.reload();
+    // location.reload();
   }
 
   return (
