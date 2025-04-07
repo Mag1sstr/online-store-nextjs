@@ -39,3 +39,35 @@
   font-weight: 700;
   color: #fff;
 }
+.counter {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+.btn {
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.btn:hover {
+  filter: brightness(90%);
+}
+.plus {
+  background-image: url(../../images//cartItem/plus.svg);
+}
+.minus {
+  background-image: url(../../images//cartItem/minus.svg);
+}
+
+.final {
+  display: flex;
+  align-items: center;
+  column-gap: 44px;
+}
+.totalPrice {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--btn-color);
+}
