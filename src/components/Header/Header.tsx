@@ -7,19 +7,24 @@ import searchImg from "../../images/header/search.svg";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useAppSelector } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebouce";
 import { useGetProductsByTitleQuery } from "@/api/shopApi";
 import { redirect } from "next/navigation";
 import LoginModal from "../LoginModal/LoginModal";
+import { getUser } from "@/store/userSlice";
 
 export default function Header() {
+  const dispatch = useAppDispatch();
+  // dispatch(getUser());
+
   const [openModal, setOpenModal] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const debounceValue = useDebounce(searchValue);
   const { data } = useGetProductsByTitleQuery(debounceValue);
   const { cart } = useAppSelector((state) => state.cart);
+  const { user } = useAppSelector((state) => state.user);
   return (
     <header className={styles.header}>
       <LoginModal open={openModal} setOpen={setOpenModal} />
@@ -28,11 +33,16 @@ export default function Header() {
           <Link href="/">
             <Image priority={true} src={logoImg} alt="logo" />
           </Link>
-
-          <div onClick={() => setOpenModal(true)} className={styles.user}>
-            <div className={styles.user__img}></div>
-            Danil karachev
-          </div>
+          {user ? (
+            <div className={styles.user}>
+              <div className={styles.user__img}></div>
+              {`${user.name}(${user.email})`}
+            </div>
+          ) : (
+            <div className={styles.login} onClick={() => setOpenModal(true)}>
+              Login
+            </div>
+          )}
           <div className={styles.search}>
             <Image src={searchImg} alt="search" />
             <input
