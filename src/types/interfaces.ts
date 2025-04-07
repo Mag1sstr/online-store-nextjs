@@ -23,3 +23,18 @@ export interface ICategory {
 export interface ICart extends IProducts {
   count: number;
 }
+
+export interface IAuth {
+  access_token: string;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface IUser {
+  id: number;
+  email: string;
+  name: string;
+}

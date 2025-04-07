@@ -3,17 +3,18 @@
   opacity: 0;
   position: fixed;
   inset: 0;
-  background: #212123cc;
+  /* background: #212123cc; */
   z-index: 1000;
-  transform: scale(0.9);
-  transition: 0.2s;
+  /* transform: scale(0.95); */
+  transition: 0.3s;
 }
 .modal {
   position: absolute;
-  right: 0;
+  right: -320px;
   width: 320px;
   background: var(--dark-gray-color);
   height: 100%;
+  transition: 0.3s;
 }
 .inner {
   padding: 24px;
@@ -52,10 +53,18 @@
 .input::placeholder {
   color: #616e74;
 }
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .open {
   visibility: visible;
   opacity: 1;
-  transform: scale(1);
+  /* transform: scale(1); */
   backdrop-filter: blur(3px);
+}
+.wrapper.open .modal {
+  right: 0;
 }

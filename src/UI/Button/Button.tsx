@@ -6,6 +6,7 @@ interface IButtonProps {
   width?: string;
   background?: string;
   color?: string;
+  fontWeight?: number;
 }
 
 export default function Button({
@@ -14,10 +15,11 @@ export default function Button({
   width,
   background = "var(--btn-color)",
   color = "#fff",
+  fontWeight = 600,
 }: IButtonProps) {
   return (
     <button
-      style={{ width, background, color }}
+      style={{ width, background, color, fontWeight }}
       className={styles.btn}
       onClick={onClick}
     >

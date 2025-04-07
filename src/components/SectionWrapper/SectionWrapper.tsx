@@ -3,7 +3,7 @@ import { IProducts } from "@/types/interfaces";
 import styles from "./SectionWrapper.module.css";
 import Card from "../Card/Card";
 import Button from "@/UI/Button/Button";
-import { useState } from "react";
+import { Ref, useState } from "react";
 import Pagination from "../Pagination/Pagination";
 
 interface IProps {
@@ -14,6 +14,7 @@ interface IProps {
   btn?: boolean;
   sort?: boolean;
   btnClick?: () => void;
+  ref?: Ref<HTMLElement> | undefined;
 }
 
 export default function SectionWrapper({
@@ -23,6 +24,7 @@ export default function SectionWrapper({
   btn,
   sort,
   btnClick,
+  ref,
 }: IProps) {
   const [click, setClick] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,7 +33,7 @@ export default function SectionWrapper({
   const startIndex = currentPage * pageSize - pageSize;
   const endIndex = startIndex + pageSize;
   return (
-    <section className={styles.wrapper}>
+    <section ref={ref} className={styles.wrapper}>
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.row}>
         {sort ? (
