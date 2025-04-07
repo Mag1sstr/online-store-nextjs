@@ -5,6 +5,7 @@ import CartItem from "../CartItem/CartItem";
 import { useAppSelector } from "@/store/store";
 import { useState } from "react";
 import LoginModal from "../LoginModal/LoginModal";
+import { redirect } from "next/navigation";
 
 export default function CartPage() {
   const [openModal, setOpenModal] = useState(false);
@@ -28,11 +29,13 @@ export default function CartPage() {
           )}
           {cart.length > 0 ? (
             <>
-              <h3 className={styles.title}>Your cart</h3>
-              <div className={styles.col}>
-                {cart.map((item) => (
-                  <CartItem key={item.id} {...item} cart={cart} />
-                ))}
+              <div>
+                <h3 className={styles.title}>Your cart</h3>
+                <div className={styles.col}>
+                  {cart.map((item) => (
+                    <CartItem key={item.id} {...item} cart={cart} />
+                  ))}
+                </div>
               </div>
               <div className={styles.row}>
                 <div className={styles.total}>
@@ -42,7 +45,10 @@ export default function CartPage() {
               </div>
             </>
           ) : (
-            <div></div>
+            <div className={styles.err}>
+              Your cart is empty
+              <Button onClick={() => redirect("/")}>Return to shopping</Button>
+            </div>
           )}
         </div>
       </div>
