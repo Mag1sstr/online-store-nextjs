@@ -25,7 +25,17 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-
+.login {
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  color: var(--light-gray);
+  transition: 0.2s;
+}
+.login:hover {
+  color: var(--purple-color);
+}
 /* search */
 .search {
   position: relative;
