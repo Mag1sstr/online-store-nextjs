@@ -8,16 +8,21 @@ import searchImg from "../../images/header/search.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebouce";
 import { useGetProductsByTitleQuery } from "@/api/shopApi";
 import { redirect } from "next/navigation";
 import LoginModal from "../LoginModal/LoginModal";
-import { getUser } from "@/store/userSlice";
+import { getUser, setUser } from "@/store/userSlice";
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  // dispatch(getUser());
+  const { token } = useAppSelector((state) => state.user);
+  useEffect(() => {
+    if (token) {
+      dispatch(getUser(token));
+    }
+  }, []);
 
   const [openModal, setOpenModal] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -25,6 +30,11 @@ export default function Header() {
   const { data } = useGetProductsByTitleQuery(debounceValue);
   const { cart } = useAppSelector((state) => state.cart);
   const { user } = useAppSelector((state) => state.user);
+
+  function logout() {
+    dispatch(setUser(null));
+    localStorage.removeItem("token");
+  }
   return (
     <header className={styles.header}>
       <LoginModal open={openModal} setOpen={setOpenModal} />
@@ -37,6 +47,12 @@ export default function Header() {
             <div className={styles.user}>
               <div className={styles.user__img}></div>
               {`${user.name}(${user.email})`}
+              <div className={styles.user__drop}>
+                <div className={styles.user__item}>Orders</div>
+                <div onClick={logout} className={styles.user__item}>
+                  Quit
+                </div>
+              </div>
             </div>
           ) : (
             <div className={styles.login} onClick={() => setOpenModal(true)}>
