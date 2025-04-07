@@ -67,13 +67,24 @@ export default function CartItem({
       </div>
       <div className={styles.price}>{price}$</div>
       <div className={styles.counter}>
-        <button onClick={() => decrease(id)}>-</button>
+        <button
+          className={`${styles.btn} ${styles.minus}`}
+          onClick={() => decrease(id)}
+        ></button>
         <div className={styles.amount}>{count}</div>
-        <button onClick={() => increase(id)}>+</button>
+        <button
+          className={`${styles.btn} ${styles.plus}`}
+          onClick={() => increase(id)}
+        ></button>
       </div>
-      <div>
+      <div className={styles.final}>
         <div className={styles.totalPrice}>{price * count}$</div>
-        <Image onClick={() => deleteCartItem(id)} src={delImage} alt="del" />
+        <Image
+          style={{ cursor: "pointer" }}
+          onClick={() => deleteCartItem(id)}
+          src={delImage}
+          alt="del"
+        />
       </div>
     </div>
   );
