@@ -14,6 +14,8 @@ import { useGetProductsByTitleQuery } from "@/api/shopApi";
 import { redirect } from "next/navigation";
 import LoginModal from "../LoginModal/LoginModal";
 import { getUser, setUser } from "@/store/userSlice";
+import { setCart } from "@/store/cartSlice";
+import { ToastContainer } from "react-toastify";
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -24,19 +26,24 @@ export default function Header() {
     }
   }, []);
 
+  console.log(token);
+
   const [openModal, setOpenModal] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const debounceValue = useDebounce(searchValue);
   const { data } = useGetProductsByTitleQuery(debounceValue);
   const { cart } = useAppSelector((state) => state.cart);
   const { user } = useAppSelector((state) => state.user);
+  const { likes } = useAppSelector((state) => state.like);
 
   function logout() {
     dispatch(setUser(null));
+    dispatch(setCart([]));
     localStorage.removeItem("token");
   }
   return (
     <header className={styles.header}>
+      <ToastContainer position="top-left" theme="dark" />
       <LoginModal open={openModal} setOpen={setOpenModal} />
       <div className="conteiner">
         <div className={styles.row}>
@@ -99,12 +106,21 @@ export default function Header() {
             </div>
           </div>
           <div className={styles.shop}>
-            <Image src={likeImg} alt="like" />
+            <div onClick={() => redirect("/likes")} className={styles.like}>
+              <Image src={likeImg} alt="like" />
+              {likes.length > 0 && (
+                <div className={`${styles.amount} ${styles.red}`}>
+                  {likes.length}
+                </div>
+              )}
+            </div>
             <div className={styles.cart}>
               <Link href="/cart">
                 <Image src={cartImg} alt="cart" />
               </Link>
-              <div className={styles.amount}>{cart.length}</div>
+              {cart.length > 0 && (
+                <div className={styles.amount}>{cart.length}</div>
+              )}
             </div>
           </div>
         </div>

@@ -4,11 +4,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import userSlice from "./userSlice";
+import likeSlice from "./likeSlice";
 
 export const store = configureStore({
   reducer: {
     cart: cartSlice,
     user: userSlice,
+    like: likeSlice,
     [shopApi.reducerPath]: shopApi.reducer,
   },
   middleware(getDefaultMiddleware) {
