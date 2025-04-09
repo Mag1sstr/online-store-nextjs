@@ -1,5 +1,11 @@
 "use client";
-import { IAuth, ICategory, ILogin, IProducts } from "@/types/interfaces";
+import {
+  IAuth,
+  ICategory,
+  ILogin,
+  IProducts,
+  IRegBody,
+} from "@/types/interfaces";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const shopApi = createApi({
@@ -41,6 +47,18 @@ export const shopApi = createApi({
         },
       }),
     }),
+    registerUser: builder.mutation<IAuth, IRegBody>({
+      query: ({ name, email, password, avatar }) => ({
+        method: "POST",
+        url: "/users/",
+        body: {
+          name,
+          email,
+          password,
+          avatar,
+        },
+      }),
+    }),
   }),
 });
 
@@ -51,4 +69,5 @@ export const {
   useGetSingleProductQuery,
   useGetProductsByTitleQuery,
   useLoginUserMutation,
+  useRegisterUserMutation,
 } = shopApi;
