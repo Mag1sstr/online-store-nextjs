@@ -27,7 +27,7 @@ export default function CartPage() {
               </Button>
             </div>
           )}
-          {cart.length > 0 ? (
+          {cart.length > 0 && user && (
             <>
               <div>
                 <h3 className={styles.title}>Your cart</h3>
@@ -44,7 +44,8 @@ export default function CartPage() {
                 <Button>Proceed to checkout</Button>
               </div>
             </>
-          ) : (
+          )}
+          {!cart.length && user && (
             <div className={styles.err}>
               Your cart is empty
               <Button onClick={() => redirect("/")}>Return to shopping</Button>
