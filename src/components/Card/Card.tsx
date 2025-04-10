@@ -16,13 +16,14 @@ export default function Card({
   images,
   price,
   category,
+  description,
 }: IProducts) {
   const [added, setAdded] = useState(false);
   const dispatch = useAppDispatch();
 
   function likeClick(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
-    dispatch(addLikeItem({ title, id, price, category, images }));
+    dispatch(addLikeItem({ title, id, price, category, images, description }));
     toast.success("Added to favorites");
     setAdded(true);
   }
