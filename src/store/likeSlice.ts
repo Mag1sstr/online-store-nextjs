@@ -1,8 +1,8 @@
-import { IProducts } from "@/types/interfaces";
+import { ICart } from "@/types/interfaces";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ILikeState {
-  likes: IProducts[];
+  likes: ICart[];
 }
 
 const initialState: ILikeState = {
@@ -20,9 +20,12 @@ export const likeSlice = createSlice({
       }
       state.likes.push(action.payload);
     },
+    setLikes(state, action) {
+      state.likes = action.payload;
+    },
   },
 });
 
-export const { addLikeItem } = likeSlice.actions;
+export const { addLikeItem, setLikes } = likeSlice.actions;
 
 export default likeSlice.reducer;
