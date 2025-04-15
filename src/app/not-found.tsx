@@ -1,7 +1,5 @@
+import NotFoundPage from "@/components/NotFoundPage/NotFoundPage";
+
 export default function NotFound() {
-  return (
-    <section>
-      <h1>404</h1>
-    </section>
-  );
+  return <NotFoundPage />;
 }
