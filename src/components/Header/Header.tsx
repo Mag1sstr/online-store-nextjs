@@ -21,12 +21,10 @@ export default function Header() {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.user);
   useEffect(() => {
-    if (token) {
-      dispatch(getUser(token));
-    }
+    dispatch(getUser(token!));
   }, []);
 
-  console.log(token);
+  // console.log(token);
 
   const [openModal, setOpenModal] = useState(false);
   const [searchValue, setSearchValue] = useState("");
