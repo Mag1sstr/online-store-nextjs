@@ -5,6 +5,9 @@ import closeImg from "../../images/close.svg";
 import Button from "@/UI/Button/Button";
 import { useEffect, useState } from "react";
 import { useLoginUserMutation, useRegisterUserMutation } from "@/api/shopApi";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "@/store/store";
+import { getUser } from "@/store/userSlice";
 
 interface IProps {
   open: boolean;
@@ -12,20 +15,26 @@ interface IProps {
 }
 
 export default function LoginModal({ open, setOpen }: IProps) {
+  const dispatch = useAppDispatch();
   const [values, setValues] = useState({
     name: "",
     email: "john@mail.com",
     password: "changeme",
   });
-  const [loginUser, { data, isSuccess: loginSuccess }] = useLoginUserMutation();
-  const [registerUser, { data: regData, isSuccess: regSuccess }] =
+  const [loginUser, { data, isSuccess: loginSuccess, isError: loginError }] =
+    useLoginUserMutation();
+  const [registerUser, { isSuccess: regSuccess, isError: regError }] =
     useRegisterUserMutation();
   const [tab, setTab] = useState("register");
-  if (loginSuccess) {
-    localStorage.setItem("token", data.access_token);
-    setOpen(false);
-    location.reload();
-  }
+  useEffect(() => {
+    if (loginSuccess) {
+      localStorage.setItem("token", data.access_token);
+      setOpen(false);
+      dispatch(getUser(data.access_token));
+      toast.success("You are logged in!");
+    }
+  }, [loginSuccess, regSuccess]);
+
   useEffect(() => {
     if (regSuccess) {
       loginUser(values);
@@ -52,6 +61,12 @@ export default function LoginModal({ open, setOpen }: IProps) {
               {tab === "login" ? "Login" : "Register"}
             </h3>
             <div className={styles.col}>
+              {loginError === true && (
+                <div className={styles.err}>Incorrect data!</div>
+              )}
+              {regError === true && (
+                <div className={styles.err}>Incorrect data!</div>
+              )}
               {tab === "register" && (
                 <input
                   value={values.name}
