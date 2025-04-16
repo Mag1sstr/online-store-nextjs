@@ -1,6 +1,6 @@
 import { IUser } from "@/types/interfaces";
 import { createSlice } from "@reduxjs/toolkit";
-import { AppDispatch, useAppSelector } from "./store";
+import { AppDispatch } from "./store";
 import axios from "axios";
 
 interface IUserSlice {
