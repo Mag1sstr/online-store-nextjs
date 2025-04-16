@@ -4,22 +4,27 @@
   gap: 24px;
 }
 .card {
+  min-height: 174px;
   padding: 12px;
   border-radius: 6px;
   display: flex;
+  justify-content: space-between;
   column-gap: 16px;
   transition: 0.2s;
 }
 .card:hover {
-  /* padding: 12px; */
   background: var(--light-gray);
 }
 .text {
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   cursor: pointer;
 }
 .text:hover {
   opacity: 0.7;
-  /* color: var(--purple-color); */
 }
 .img {
   width: 170px;
@@ -33,4 +38,22 @@
 }
 .desc {
   font-size: 14px;
+  color: var(--text-gray);
+}
+.category {
+  padding: 6px 12px;
+  background-color: var(--text-gray);
+  color: #212123;
+  border-radius: 10px;
+  font-weight: 500;
+}
+.row {
+  display: flex;
+  column-gap: 16px;
+}
+.block {
+  width: 100%;
+}
+.price {
+  font-size: 30px;
 }
