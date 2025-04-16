@@ -3,7 +3,6 @@ import Image from "next/image";
 import styles from "./InfoBlock.module.css";
 import compImg from "../../images/comp.png";
 import Button from "@/UI/Button/Button";
-import { Ref } from "react";
 
 interface IProps {
   sectionRef?: HTMLDivElement | null | undefined;
