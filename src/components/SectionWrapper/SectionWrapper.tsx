@@ -23,7 +23,6 @@ export default function SectionWrapper({
   amount,
   btn,
   sort,
-  btnClick,
   ref,
 }: IProps) {
   const [click, setClick] = useState(false);
@@ -32,9 +31,19 @@ export default function SectionWrapper({
   const totalPages = data && Math.ceil(data.length / pageSize);
   const startIndex = currentPage * pageSize - pageSize;
   const endIndex = startIndex + pageSize;
+
+  const [value, setValue] = useState({
+    from: "0",
+    to: "60",
+  });
   return (
     <section ref={ref} className={styles.wrapper}>
       <h3 className={styles.title}>{title}</h3>
+
+      <input type="text" placeholder="from" value={value.from} />
+      <input type="text" placeholder="to" value={value.to} />
+      <button>Find</button>
+
       <div className={styles.row}>
         {sort ? (
           <>
