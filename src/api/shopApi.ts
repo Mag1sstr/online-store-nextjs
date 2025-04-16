@@ -14,7 +14,7 @@ export const shopApi = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query<IProducts[], null>({
       query: () => ({
-        url: "/products",
+        url: `/products`,
       }),
     }),
     getCategories: builder.query<ICategory[], null>({
