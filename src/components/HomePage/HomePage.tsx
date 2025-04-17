@@ -1,5 +1,4 @@
 "use client";
-import { useGetProductsQuery } from "@/api/shopApi";
 import styles from "./HomePage.module.css";
 import Categories from "../Categories/Categories";
 import InfoBlock from "../InfoBlock/InfoBlock";
@@ -7,7 +6,6 @@ import SectionWrapper from "../SectionWrapper/SectionWrapper";
 import { useRef } from "react";
 
 export default function HomePage() {
-  const { data: products } = useGetProductsQuery(null);
   const sectionRef = useRef(null);
   console.log(sectionRef.current);
 
@@ -20,19 +18,8 @@ export default function HomePage() {
             <InfoBlock sectionRef={sectionRef.current} />
           </div>
         </section>
-        <SectionWrapper
-          ref={sectionRef}
-          title="Products"
-          data={products}
-          amount={5}
-          btn
-        />
-        <SectionWrapper
-          title="Less than 100$"
-          data={products}
-          amount={10}
-          sort
-        />
+        <SectionWrapper ref={sectionRef} title="Products" amount={5} btn />
+        <SectionWrapper title="Less than 100$" amount={10} sort btn />
       </div>
     </div>
   );
