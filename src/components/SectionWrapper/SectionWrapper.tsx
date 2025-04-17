@@ -5,11 +5,13 @@ import Card from "../Card/Card";
 import Button from "@/UI/Button/Button";
 import { Ref, useState } from "react";
 import Pagination from "../Pagination/Pagination";
+import { useGetProductsQuery } from "@/api/shopApi";
+import { useDebounce } from "@/hooks/useDebouce";
 
 interface IProps {
   title: string;
   children?: React.ReactNode;
-  data: IProducts[] | undefined;
+  data?: IProducts[] | undefined;
   amount?: number;
   btn?: boolean;
   sort?: boolean;
@@ -19,30 +21,69 @@ interface IProps {
 
 export default function SectionWrapper({
   title,
-  data,
+  // data,
   amount,
   btn,
   sort,
   ref,
 }: IProps) {
+  const [value, setValue] = useState({
+    from: "",
+    to: "",
+  });
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search);
+
+  const { data } = useGetProductsQuery({
+    title: debouncedSearch,
+    price_min: value.from,
+    price_max: value.to,
+  });
+
   const [click, setClick] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
-  const totalPages = data && Math.ceil(data.length / pageSize);
+  const totalPages =
+    data &&
+    Math.ceil(
+      sort === true
+        ? data.filter((v) => v.price < 100).length / pageSize
+        : data.length / pageSize
+    );
   const startIndex = currentPage * pageSize - pageSize;
   const endIndex = startIndex + pageSize;
 
-  const [value, setValue] = useState({
-    from: "0",
-    to: "60",
-  });
   return (
     <section ref={ref} className={styles.wrapper}>
       <h3 className={styles.title}>{title}</h3>
-
-      <input type="text" placeholder="from" value={value.from} />
-      <input type="text" placeholder="to" value={value.to} />
-      <button>Find</button>
+      <div className={styles.filters}>
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="Product name"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="from"
+          value={value.from}
+          onChange={(e) =>
+            setValue({
+              ...value,
+              from: e.target.value === "0" ? "1" : e.target.value,
+            })
+          }
+        />
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="to"
+          value={value.to}
+          onChange={(e) => setValue({ ...value, to: e.target.value })}
+        />
+      </div>
 
       <div className={styles.row}>
         {sort ? (
@@ -50,7 +91,7 @@ export default function SectionWrapper({
             {data &&
               data
                 ?.filter((v) => v.price < 100)
-                .slice(0, amount)
+                .slice(click ? startIndex : 0, click ? endIndex : amount)
                 .map((item) => <Card key={item.id} {...item} />)}
           </>
         ) : (
