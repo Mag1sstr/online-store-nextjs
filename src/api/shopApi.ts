@@ -8,13 +8,26 @@ import {
 } from "@/types/interfaces";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+interface IFilters {
+  title?: string;
+  price_min?: string | null;
+  price_max?: string | null;
+  categoryId?: number | null;
+}
+
 export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.escuelajs.co/api/v1" }),
   endpoints: (builder) => ({
-    getProducts: builder.query<IProducts[], null>({
-      query: () => ({
+    getProducts: builder.query<IProducts[], IFilters>({
+      query: ({ title, price_min, price_max, categoryId }) => ({
         url: `/products`,
+        params: {
+          title,
+          price_min,
+          price_max,
+          categoryId,
+        },
       }),
     }),
     getCategories: builder.query<ICategory[], null>({
