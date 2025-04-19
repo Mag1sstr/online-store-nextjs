@@ -24,8 +24,6 @@ export default function Header() {
     dispatch(getUser(token!));
   }, []);
 
-  // console.log(token);
-
   const [openModal, setOpenModal] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const debounceValue = useDebounce(searchValue);
