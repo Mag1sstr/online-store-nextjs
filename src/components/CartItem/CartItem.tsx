@@ -2,7 +2,6 @@ import { ICart } from "@/types/interfaces";
 import styles from "./CartItem.module.css";
 import Image from "next/image";
 import delImage from "../../images/del.svg";
-import { MouseEvent } from "react";
 import { useAppDispatch } from "@/store/store";
 import { setCart } from "@/store/cartSlice";
 
