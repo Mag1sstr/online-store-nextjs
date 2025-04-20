@@ -1,5 +1,5 @@
 "use client";
-import { IProducts } from "@/types/interfaces";
+
 import styles from "./SectionWrapper.module.css";
 import Card from "../Card/Card";
 import Button from "@/UI/Button/Button";
@@ -11,21 +11,21 @@ import { useDebounce } from "@/hooks/useDebouce";
 interface IProps {
   title: string;
   children?: React.ReactNode;
-  data?: IProducts[] | undefined;
   amount?: number;
   btn?: boolean;
   sort?: boolean;
   btnClick?: () => void;
   ref?: Ref<HTMLElement> | undefined;
+  filters?: boolean;
 }
 
 export default function SectionWrapper({
   title,
-  // data,
   amount,
   btn,
   sort,
   ref,
+  filters,
 }: IProps) {
   const [value, setValue] = useState({
     from: "",
@@ -56,34 +56,36 @@ export default function SectionWrapper({
   return (
     <section ref={ref} className={styles.wrapper}>
       <h3 className={styles.title}>{title}</h3>
-      <div className={styles.filters}>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="Product name"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="from"
-          value={value.from}
-          onChange={(e) =>
-            setValue({
-              ...value,
-              from: e.target.value === "0" ? "1" : e.target.value,
-            })
-          }
-        />
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="to"
-          value={value.to}
-          onChange={(e) => setValue({ ...value, to: e.target.value })}
-        />
-      </div>
+      {filters && (
+        <div className={styles.filters}>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Product name"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="from"
+            value={value.from}
+            onChange={(e) =>
+              setValue({
+                ...value,
+                from: e.target.value === "0" ? "1" : e.target.value,
+              })
+            }
+          />
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="to"
+            value={value.to}
+            onChange={(e) => setValue({ ...value, to: e.target.value })}
+          />
+        </div>
+      )}
 
       <div className={styles.row}>
         {sort ? (
