@@ -12,9 +12,12 @@ import { MouseEvent } from "react";
 export default function LikesPage() {
   const dispatch = useAppDispatch();
   const { likes } = useAppSelector((state) => state.like);
+  const { user } = useAppSelector((state) => state.user);
 
   function handleClick(event: MouseEvent<HTMLButtonElement>, item: ICart) {
     event.stopPropagation();
+    if (!user) return toast.error("Login to your account");
+
     dispatch(addCart({ ...item, count: 1 }));
     dispatch(setLikes(likes.filter((v) => v.id !== item.id)));
     toast.success("Added to cart");
