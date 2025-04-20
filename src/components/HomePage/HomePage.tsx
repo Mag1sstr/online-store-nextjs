@@ -18,7 +18,13 @@ export default function HomePage() {
             <InfoBlock sectionRef={sectionRef.current} />
           </div>
         </section>
-        <SectionWrapper ref={sectionRef} title="Products" amount={5} btn />
+        <SectionWrapper
+          ref={sectionRef}
+          title="Products"
+          amount={5}
+          btn
+          filters
+        />
         <SectionWrapper title="Less than 100$" amount={10} sort btn />
       </div>
     </div>
