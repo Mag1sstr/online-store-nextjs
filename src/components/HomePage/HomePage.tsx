@@ -3,11 +3,21 @@ import styles from "./HomePage.module.css";
 import Categories from "../Categories/Categories";
 import InfoBlock from "../InfoBlock/InfoBlock";
 import SectionWrapper from "../SectionWrapper/SectionWrapper";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useAppDispatch } from "@/store/store";
+import { getUser, setToken } from "@/store/userSlice";
 
 export default function HomePage() {
+  const dispatch = useAppDispatch();
+
   const sectionRef = useRef(null);
   console.log(sectionRef.current);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(setToken(localStorage.getItem("token")));
+      dispatch(getUser(localStorage.getItem("token")));
+    }
+  }, []);
 
   return (
     <div className={styles.page}>
