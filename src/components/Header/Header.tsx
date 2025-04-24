@@ -13,7 +13,7 @@ import { useDebounce } from "@/hooks/useDebouce";
 import { useGetProductsByTitleQuery } from "@/api/shopApi";
 import { redirect } from "next/navigation";
 import LoginModal from "../LoginModal/LoginModal";
-import { getUser, setUser } from "@/store/userSlice";
+import { getUser, setToken, setUser } from "@/store/userSlice";
 import { setCart } from "@/store/cartSlice";
 import { ToastContainer } from "react-toastify";
 
@@ -35,6 +35,7 @@ export default function Header() {
   function logout() {
     dispatch(setUser(null));
     dispatch(setCart([]));
+    dispatch(setToken(null));
     localStorage.removeItem("token");
   }
   return (
