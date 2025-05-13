@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* border: 1px solid red; */
 }
 body {
   font-family: "Montserrat", sans-serif;
@@ -24,7 +25,8 @@ ul {
   list-style: none;
 }
 .conteiner {
-  max-width: 1260px;
+  max-width: 1290px;
+  padding: 0 15px;
   margin: 0 auto;
 }
 
